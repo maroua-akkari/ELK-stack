@@ -16,6 +16,6 @@ apt_update 'update_sources' do
 end
 
 
-bash '' do
-  code 'curl -XGET --globoff "http://localhost:9200/logstash/typename/optionalUniqueId" -d '{ "field" : "value" }''
-end
+# bash '' do
+#   code 'curl -XGET --globoff "http://localhost:9200/logstash/typename/optionalUniqueId" -d '{ "field" : "value" }''
+# end
