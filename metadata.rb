@@ -8,7 +8,6 @@ version '0.1.0'
 chef_version '>= 14.0'
 
 depends 'java', '~> 4.1.0'
-depends 'simple-logstash', '~> 1.0.2'
 depends 'elasticsearch', '~> 3.4.9'
 depends 'kibana'
 depends 'nginx'

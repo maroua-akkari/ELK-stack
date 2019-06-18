@@ -5,7 +5,6 @@
 # Copyright:: 2019, The Authors, All Rights Reserved.
 include_recipe "java"
 include_recipe 'elasticsearch'
-include_recipe 'simple-logstash'
 include_recipe 'kibana::default'
 
 
@@ -14,9 +13,6 @@ include_recipe 'kibana::default'
 apt_update 'update_sources' do
   action :update
 end
-
-
-
 #
 bash '' do
   code 'sudo apt-get -y install logstash'
@@ -59,8 +55,15 @@ end
 #   owner "root"
 #   group "root"
 #   mode "0777"
-#   source "filebeat.yml.erb"
+#   source "filebeat.yml"
 # end
+
+template "/var/log/test.log" do
+  owner "root"
+  group "root"
+  mode "0777"
+  source "test.log.erb"
+end
 
 bash '' do
   code 'sudo service filebeat start'
