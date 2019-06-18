@@ -1,19 +1,21 @@
+
 input {
   beats {
-    port => "5043"
+    port => 5044
   }
 }
 
-filter {
-  drop {
-    remove_field => [ "headers","host" ]
-  }
-}
+# The filter part of this file is commented out to indicate that it is
+# optional.
+# filter {
+#
+# }
 
 output {
-  elasticsearch{
-    hosts => ["http://localhost:9200"]
-    index => "logstash-%{+YYYY.MM.DD}"
+  elasticsearch {
+    hosts => "localhost:9200"
+    manage_template => false
+    index => "%{[@metadata][beat]}-%{+YYYY.MM.dd}"
+    document_type => "%{[@metadata][type]}"
   }
-
 }
