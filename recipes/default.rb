@@ -7,13 +7,14 @@ include_recipe "java"
 include_recipe 'elasticsearch'
 include_recipe 'kibana::default'
 
-
-
-
 apt_update 'update_sources' do
   action :update
 end
+<<<<<<< HEAD
 #
+=======
+
+>>>>>>> 37aab4795dcd643c1f5024a757e032acc6a0af29
 bash '' do
   code 'sudo apt-get -y install logstash'
 end
@@ -51,12 +52,28 @@ bash '' do
   code 'sudo apt-get install filebeat'
 end
 
+<<<<<<< HEAD
 # template "/etc/filebeat/filebeat.yml" do
 #   owner "root"
 #   group "root"
 #   mode "0777"
 #   source "filebeat.yml"
 # end
+=======
+template "/etc/filebeat/filebeat.yml" do
+  owner "root"
+  group "root"
+  mode "0755"
+  source "filebeat.yml.erb"
+end
+
+template "/var/log/test.log" do
+  owner "root"
+  group "root"
+  mode "0777"
+  source "test.log"
+end
+>>>>>>> 37aab4795dcd643c1f5024a757e032acc6a0af29
 
 template "/var/log/test.log" do
   owner "root"
@@ -72,4 +89,3 @@ end
 bash '' do
   code 'sudo systemctl enable filebeat'
 end
-#
