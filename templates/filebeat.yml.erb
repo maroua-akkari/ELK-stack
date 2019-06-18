@@ -1,4 +1,4 @@
-##################### Filebeat Configuration Example #########################
+###################### Filebeat Configuration Example #########################
 
 # This file is an example configuration file highlighting only the most common
 # options. The filebeat.full.yml file from the same directory contains all the
@@ -17,29 +17,24 @@ filebeat.prospectors:
 
 - input_type: log
 
-
-  # Change to true to enable this input configuration.
-  # enabled: false
-
   # Paths that should be crawled and fetched. Glob based paths.
   paths:
-    - /var/log/auth.log
-    - /var/log/syslog
+    - /var/log/*.log
     #- c:\programdata\elasticsearch\logs\*
 
   # Exclude lines. A list of regular expressions to match. It drops the lines that are
   # matching any regular expression from the list.
-  #exclude_lines: ['^DBG']
+  #exclude_lines: ["^DBG"]
 
   # Include lines. A list of regular expressions to match. It exports the lines that are
   # matching any regular expression from the list.
-  #include_lines: ['^ERR', '^WARN']
+  #include_lines: ["^ERR", "^WARN"]
 
   # Exclude files. A list of regular expressions to match. Filebeat drops the files that
   # are matching any regular expression from the list. By default, no files are dropped.
-  #exclude_files: ['.gz$']
+  #exclude_files: [".gz$"]
 
-  # Optional additional fields. These fields can be freely picked
+  # Optional additional fields. These field can be freely picked
   # to add additional information to the crawled log files for filtering
   #fields:
   #  level: debug
@@ -47,7 +42,7 @@ filebeat.prospectors:
 
   ### Multiline options
 
-  # Multiline can be used for log messages spanning multiple lines. This is common
+  # Mutiline can be used for log messages spanning multiple lines. This is common
   # for Java Stack Traces or C-Line Continuation
 
   # The regexp Pattern that has to be matched. The example pattern matches all lines starting with [
@@ -60,6 +55,7 @@ filebeat.prospectors:
   # that was (not) matched before or after or as long as a pattern is not matched based on negate.
   # Note: After is the equivalent to previous and before is the equivalent to to next in Logstash
   #multiline.match: after
+
 
 #================================ General =====================================
 
@@ -76,11 +72,10 @@ filebeat.prospectors:
 #fields:
 #  env: staging
 
-#cloud.auth:
-
 #================================ Outputs =====================================
 
-# Configure what output to use when sending the data collected by the beat.
+# Configure what outputs to use when sending the data collected by the beat.
+# Multiple outputs may be used.
 
 #-------------------------- Elasticsearch output ------------------------------
 output.elasticsearch:
@@ -93,7 +88,6 @@ output.elasticsearch:
   #password: "changeme"
 
 #----------------------------- Logstash output --------------------------------
-
 #output.logstash:
   # The Logstash hosts
   #hosts: ["localhost:5044"]
@@ -108,12 +102,10 @@ output.elasticsearch:
   # Client Certificate Key
   #ssl.key: "/etc/pki/client/cert.key"
 
-
-
 #================================ Logging =====================================
 
 # Sets log level. The default log level is info.
-# Available log levels are: error, warning, info, debug
+# Available log levels are: critical, error, warning, info, debug
 #logging.level: debug
 
 # At debug level, you can selectively enable logging only for some components.
