@@ -1,11 +1,9 @@
----
-driver:
-  name: vagrant
-  network:
-    - ["forwarded_port", {guest: 5601, host: 5601, auto_correct: true}]
-    - ["forwarded_port", {guest: 5044, host: 5044, auto_correct: true}]
-    - ["forwarded_port", {guest: 8080, host: 8080, auto_correct: true}]
-    - ["forwarded_port", {guest: 9200, host: 9200, auto_correct: true}]
+driver_config:
+  name: ec2
+  region: eu-west-1
+  instance_type: t2.small
+  associate_public_ip: true
+  require_chef_omnibus: true
 
 provisioner:
   name: chef_zero
@@ -18,7 +16,6 @@ provisioner:
 verifier:
   name: inspec
 
-
 platforms:
   - name: ubuntu-16.04
 
@@ -26,8 +23,6 @@ suites:
   - name: default
     run_list:
       - recipe[elk::default]
-      - recipe[kibana::default]
-      - recipe[kibana::kibana5]
     verifier:
       inspec_tests:
         - test/integration/default

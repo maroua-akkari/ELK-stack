@@ -48,21 +48,6 @@ bash '' do
   code 'sudo apt-get install filebeat'
 end
 
-template "/etc/filebeat/filebeat.yml" do
-  owner "root"
-  group "root"
-  mode "0755"
-  source "filebeat.yml.erb"
-end
-
-
-template "/var/log/test.log" do
-  owner "root"
-  group "root"
-  mode "0777"
-  source "test.log.erb"
-end
-
 bash '' do
   code 'sudo service filebeat start'
 end
